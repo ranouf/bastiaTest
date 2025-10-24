@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.tmp/
+.DS_Store
+npm-debug.log*
+package-lock.json
+bastia-app/package-lock.json
+bastia-app/node_modules/
+bastia-app/dist/
+coverage/
