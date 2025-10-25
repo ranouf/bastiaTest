@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface Dossier {
@@ -24,6 +24,8 @@ interface Dossier {
 })
 export class AppComponent {
   title = 'Bastia Dossiers';
+
+  showNewDossierDialog = false;
 
   dossiers: Dossier[] = [
     {
@@ -159,4 +161,19 @@ export class AppComponent {
   ];
 
   pagination = ['1', '2', '3', '...', '8'];
+
+  openNewDossierDialog(): void {
+    this.showNewDossierDialog = true;
+  }
+
+  closeNewDossierDialog(): void {
+    this.showNewDossierDialog = false;
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    if (this.showNewDossierDialog) {
+      this.closeNewDossierDialog();
+    }
+  }
 }
