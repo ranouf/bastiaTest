@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface Dossier {
@@ -22,10 +22,12 @@ interface Dossier {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'Bastia Dossiers';
 
   showNewDossierDialog = false;
+
+  private previousBodyOverflow = '';
 
   dossiers: Dossier[] = [
     {
@@ -164,16 +166,35 @@ export class AppComponent {
 
   openNewDossierDialog(): void {
     this.showNewDossierDialog = true;
+    this.toggleBodyScroll(true);
   }
 
   closeNewDossierDialog(): void {
     this.showNewDossierDialog = false;
+    this.toggleBodyScroll(false);
   }
 
   @HostListener('document:keydown.escape')
   onEscape(): void {
     if (this.showNewDossierDialog) {
       this.closeNewDossierDialog();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.toggleBodyScroll(false);
+  }
+
+  private toggleBodyScroll(lock: boolean): void {
+    if (typeof document === 'undefined') {
+      return;
+    }
+
+    if (lock) {
+      this.previousBodyOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = this.previousBodyOverflow;
     }
   }
 }
