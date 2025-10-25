@@ -231,135 +231,171 @@
   </main>
 </div>
 
-<div
-  *ngIf="showNewDossierDialog"
-  class="fixed inset-0 z-50 flex items-center justify-center px-4 py-6"
-  (click)="closeNewDossierDialog()"
->
-  <div class="absolute inset-0 bg-black/50"></div>
+<div *ngIf="showNewDossierDialog" class="fixed inset-0 z-50">
+  <div class="absolute inset-0 bg-black/50" (click)="closeNewDossierDialog()"></div>
 
   <div
-    class="relative w-full max-w-[640px] sm:max-w-lg bg-white rounded-lg shadow-lg p-6 space-y-6"
+    class="fixed top-[50%] left-[50%] z-50 grid w-full translate-x-[-50%] translate-y-[-50%] rounded-lg border border-slate-300 bg-white shadow-lg duration-200 sm:max-w-lg max-w-[640px] p-0"
     role="dialog"
     aria-modal="true"
     aria-labelledby="new-dossier-title"
     aria-describedby="new-dossier-description"
+    tabindex="-1"
     (click)="$event.stopPropagation()"
   >
-    <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-      <div class="space-y-1">
-        <h2 id="new-dossier-title" class="text-lg font-semibold text-[#140500]">Nouveau dossier</h2>
-        <p id="new-dossier-description" class="text-sm text-slate-500">
-          Créez un dossier manuel en complétant les informations du projet.
-        </p>
-      </div>
-      <button
-        type="button"
-        class="flex items-center justify-center w-6 h-6 rounded-lg text-slate-500 hover:bg-slate-100 transition-colors"
-        (click)="closeNewDossierDialog()"
-        aria-label="Fermer"
-      >
-        <svg class="size-4" fill="none" viewBox="0 0 16 16" aria-hidden="true">
-          <path
-            d="M4.5286 4.5286C4.78895 4.26825 5.21106 4.26825 5.4714 4.5286L8 7.05719L10.5286 4.5286C10.7889 4.26825 11.2111 4.26825 11.4714 4.5286C11.7318 4.78895 11.7318 5.21106 11.4714 5.4714L8.94281 8L11.4714 10.5286C11.7318 10.7889 11.7318 11.2111 11.4714 11.4714C11.2111 11.7318 10.7889 11.7318 10.5286 11.4714L8 8.94281L5.4714 11.4714C5.21106 11.7318 4.78895 11.7318 4.5286 11.4714C4.26825 11.2111 4.26825 10.7889 4.5286 10.5286L7.05719 8L4.5286 5.4714C4.26825 5.21106 4.26825 4.78895 4.5286 4.5286Z"
-            fill="#64748B"
-            fill-rule="evenodd"
-          />
-        </svg>
-      </button>
+    <div class="flex flex-col gap-2 text-center sm:text-left px-6 py-4 border-b border-slate-300">
+      <h2 id="new-dossier-title" class="text-lg leading-none font-semibold">Créer un nouveau dossier</h2>
+      <p id="new-dossier-description" class="text-muted-foreground text-sm sr-only">
+        Formulaire en 5 étapes pour créer un nouveau dossier
+      </p>
     </div>
 
-    <div class="space-y-4">
-      <div class="space-y-2">
-        <span class="text-sm font-medium text-[#140500]">Mode</span>
-        <div class="flex flex-wrap gap-2">
-          <button
-            type="button"
-            class="px-4 py-2 rounded-lg bg-[#140500] text-white text-sm font-medium shadow-sm"
-          >
-            Manuel
+    <div class="px-8 py-8 border-b border-slate-300">
+      <div class="flex items-center gap-4 w-full">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded-full flex items-center justify-center bg-[#140500]">
+            <span class="text-xs font-medium text-white">1</span>
+          </div>
+          <span class="text-sm font-medium text-[#140500]">Coordonnées</span>
+        </div>
+        <div class="flex-1 px-4">
+          <div class="h-0.5 bg-slate-100"></div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-6 h-6 rounded-full flex items-center justify-center bg-slate-100">
+            <span class="text-xs font-medium text-slate-500">2</span>
+          </div>
+        </div>
+        <div class="flex-1 px-4">
+          <div class="h-0.5 bg-slate-100"></div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-6 h-6 rounded-full flex items-center justify-center bg-slate-100">
+            <span class="text-xs font-medium text-slate-500">3</span>
+          </div>
+        </div>
+        <div class="flex-1 px-4">
+          <div class="h-0.5 bg-slate-100"></div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-6 h-6 rounded-full flex items-center justify-center bg-slate-100">
+            <span class="text-xs font-medium text-slate-500">4</span>
+          </div>
+        </div>
+        <div class="flex-1 px-4">
+          <div class="h-0.5 bg-slate-100"></div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-6 h-6 rounded-full flex items-center justify-center bg-slate-100">
+            <span class="text-xs font-medium text-slate-500">5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative max-h-[60vh] overflow-hidden">
+      <div class="size-full overflow-y-auto px-6 py-6 space-y-8">
+        <div class="w-72">
+          <label class="block text-sm font-medium text-[#140500] mb-1">Type de dossier</label>
+          <select class="w-full px-3 py-2 border border-slate-300 rounded-lg bg-slate-100">
+            <option>Construction</option>
+          </select>
+        </div>
+
+        <div class="w-full">
+          <label class="block text-sm font-medium text-[#140500] mb-1">Adresse visée</label>
+          <div class="relative">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" fill="none" viewBox="0 0 16 16" aria-hidden="true">
+              <path
+                d="M7.33333 2.66667C4.756 2.66667 2.66667 4.756 2.66667 7.33333C2.66667 9.91066 4.756 12 7.33333 12C9.91066 12 12 9.91066 12 7.33333C12 4.756 9.91066 2.66667 7.33333 2.66667ZM1.33333 7.33333C1.33333 4.01962 4.01962 1.33333 7.33333 1.33333C10.647 1.33333 13.3333 4.01962 13.3333 7.33333C13.3333 8.75001 12.8424 10.052 12.0213 11.0785L14.4714 13.5286C14.7318 13.7889 14.7318 14.2111 14.4714 14.4714C14.2111 14.7318 13.7889 14.7318 13.5286 14.4714L11.0785 12.0213C10.052 12.8424 8.75001 13.3333 7.33333 13.3333C4.01962 13.3333 1.33333 10.647 1.33333 7.33333Z"
+                fill="#64748B"
+                fill-rule="evenodd"
+              />
+            </svg>
+            <input type="text" placeholder="Cherchez un immeuble" class="w-full pl-10 pr-3 py-2 border border-slate-300 rounded-lg" />
+          </div>
+        </div>
+
+        <div class="w-72">
+          <label class="block text-sm font-medium text-[#140500] mb-1">Débiteur</label>
+          <select class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+            <option>Sélectionnez votre conseiller</option>
+          </select>
+        </div>
+
+        <div class="flex items-end gap-4">
+          <div class="flex-1">
+            <label class="block text-sm font-medium text-[#140500] mb-1"
+              >Conseiller juridique <span class="font-normal text-slate-500">(Optionnel)</span></label
+            >
+            <select class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+              <option>Sélectionnez un conseiller</option>
+            </select>
+          </div>
+          <button type="button" class="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-slate-50 transition-colors">
+            <svg class="w-4 h-4 opacity-60" fill="none" viewBox="0 0 16 16" aria-hidden="true">
+              <path
+                d="M8 2.66667C8.36819 2.66667 8.66667 2.96514 8.66667 3.33333V7.33333H12.6667C13.0349 7.33333 13.3333 7.63181 13.3333 8C13.3333 8.36819 13.0349 8.66667 12.6667 8.66667H8.66667V12.6667C8.66667 13.0349 8.36819 13.3333 8 13.3333C7.63181 13.3333 7.33333 13.0349 7.33333 12.6667V8.66667H3.33333C2.96514 8.66667 2.66667 8.36819 2.66667 8C2.66667 7.63181 2.96514 7.33333 3.33333 7.33333H7.33333V3.33333C7.33333 2.96514 7.63181 2.66667 8 2.66667Z"
+                fill="#140500"
+                fill-rule="evenodd"
+              />
+            </svg>
+            <span class="font-medium text-sm">Ajouter un conseiller</span>
           </button>
-          <button type="button" class="px-4 py-2 rounded-lg border border-slate-300 text-sm font-medium">
-            Automatique
+        </div>
+
+        <div class="flex items-end gap-4">
+          <div class="flex-1">
+            <label class="block text-sm font-medium text-[#140500] mb-1"
+              >Autre personne intéressée <span class="font-normal text-slate-500">(Optionnel)</span></label
+            >
+            <select class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+              <option>Sélectionnez une personne</option>
+            </select>
+          </div>
+          <button type="button" class="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-slate-50 transition-colors">
+            <svg class="w-4 h-4 opacity-60" fill="none" viewBox="0 0 16 16" aria-hidden="true">
+              <path
+                d="M8 2.66667C8.36819 2.66667 8.66667 2.96514 8.66667 3.33333V7.33333H12.6667C13.0349 7.33333 13.3333 7.63181 13.3333 8C13.3333 8.36819 13.0349 8.66667 12.6667 8.66667H8.66667V12.6667C8.66667 13.0349 8.36819 13.3333 8 13.3333C7.63181 13.3333 7.33333 13.0349 7.33333 12.6667V8.66667H3.33333C2.96514 8.66667 2.66667 8.36819 2.66667 8C2.66667 7.63181 2.96514 7.33333 3.33333 7.33333H7.33333V3.33333C7.33333 2.96514 7.63181 2.66667 8 2.66667Z"
+                fill="#140500"
+                fill-rule="evenodd"
+              />
+            </svg>
+            <span class="font-medium text-sm">Ajouter une personne</span>
           </button>
         </div>
       </div>
-
-      <div class="grid grid-cols-2 gap-4">
-        <label class="flex flex-col gap-2 col-span-2">
-          <span class="text-sm font-medium text-[#140500]">Adresse</span>
-          <input type="text" class="px-3 py-2 border border-slate-300 rounded-lg" placeholder="2131 Lacordaire, Montréal" />
-        </label>
-        <label class="flex flex-col gap-2">
-          <span class="text-sm font-medium text-[#140500]">Client / Débiteur</span>
-          <input type="text" class="px-3 py-2 border border-slate-300 rounded-lg" placeholder="ABF inc" />
-        </label>
-        <label class="flex flex-col gap-2">
-          <span class="text-sm font-medium text-[#140500]">Valeur</span>
-          <input type="text" class="px-3 py-2 border border-slate-300 rounded-lg" placeholder="200.00 $" />
-        </label>
-        <label class="flex flex-col gap-2">
-          <span class="text-sm font-medium text-[#140500]">Type</span>
-          <select class="px-3 py-2 border border-slate-300 rounded-lg">
-            <option>Construction</option>
-            <option>Taxes</option>
-            <option>Jugement</option>
-            <option>Copropriétée</option>
-          </select>
-        </label>
-        <label class="flex flex-col gap-2">
-          <span class="text-sm font-medium text-[#140500]">Prochaine étape</span>
-          <select class="px-3 py-2 border border-slate-300 rounded-lg">
-            <option>Mise en demeure</option>
-            <option>Préparation</option>
-            <option>Soumission</option>
-          </select>
-        </label>
-        <label class="flex flex-col gap-2">
-          <span class="text-sm font-medium text-[#140500]">État</span>
-          <select class="px-3 py-2 border border-slate-300 rounded-lg">
-            <option>Programmé</option>
-            <option>Soumis</option>
-            <option>Urgent</option>
-            <option>Annulé</option>
-          </select>
-        </label>
-        <label class="flex flex-col gap-2">
-          <span class="text-sm font-medium text-[#140500]">Date d'émission prévue</span>
-          <input type="date" class="px-3 py-2 border border-slate-300 rounded-lg" />
-        </label>
-        <label class="flex flex-col gap-2">
-          <span class="text-sm font-medium text-[#140500]">Date d'échéance</span>
-          <input type="date" class="px-3 py-2 border border-slate-300 rounded-lg" />
-        </label>
-        <label class="flex flex-col gap-2 col-span-2">
-          <span class="text-sm font-medium text-[#140500]">Notes</span>
-          <textarea class="px-3 py-2 border border-slate-300 rounded-lg resize-none" rows="3" placeholder="Ajouter des informations supplémentaires"></textarea>
-        </label>
-      </div>
     </div>
 
-    <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+    <div class="flex items-center justify-between px-6 py-4 border-t border-slate-300">
       <button
         type="button"
-        class="h-9 px-4 py-2 border border-slate-300 rounded-lg bg-white shadow-sm hover:bg-slate-50 transition-colors"
+        class="flex items-center justify-center h-9 px-4 py-2 border border-slate-300 rounded-lg bg-white shadow-sm hover:bg-slate-50 transition-colors"
         (click)="closeNewDossierDialog()"
       >
         <span class="font-medium text-sm">Annuler</span>
       </button>
-      <button
-        type="button"
-        class="flex items-center gap-2 h-9 px-4 py-2 bg-[#FF4400] rounded-lg shadow-sm hover:bg-[#E63D00] transition-colors"
-      >
-        <svg class="w-4 h-4 opacity-60" fill="none" viewBox="0 0 16 16" aria-hidden="true">
-          <path
-            d="M8 2.66667C8.36819 2.66667 8.66667 2.96514 8.66667 3.33333V7.33333H12.6667C13.0349 7.33333 13.3333 7.63181 13.3333 8C13.3333 8.36819 13.0349 8.66667 12.6667 8.66667H8.66667V12.6667C8.66667 13.0349 8.36819 13.3333 8 13.3333C7.63181 13.3333 7.33333 13.0349 7.33333 12.6667V8.66667H3.33333C2.96514 8.66667 2.66667 8.36819 2.66667 8C2.66667 7.63181 2.96514 7.33333 3.33333 7.33333H7.33333V3.33333C7.33333 2.96514 7.63181 2.66667 8 2.66667Z"
-            fill="#FFECE5"
-            fill-rule="evenodd"
-          />
-        </svg>
-        <span class="font-medium text-sm text-[#FFECE5]">Créer le dossier</span>
-      </button>
+      <div class="flex gap-3">
+        <button
+          type="button"
+          class="flex items-center justify-center h-9 px-4 py-2 bg-[#FF4400] rounded-lg shadow-sm hover:bg-[#E63D00] transition-colors"
+        >
+          <span class="font-medium text-sm text-[#FFECE5]">Étape suivante</span>
+        </button>
+      </div>
     </div>
+
+    <button
+      type="button"
+      class="absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-ring ring-offset-background"
+      (click)="closeNewDossierDialog()"
+      aria-label="Fermer"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18"></path>
+        <path d="m6 6 12 12"></path>
+      </svg>
+      <span class="sr-only">Fermer</span>
+    </button>
   </div>
 </div>
